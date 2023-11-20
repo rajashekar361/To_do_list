@@ -1,16 +1,15 @@
 from datetime import datetime
 from prettytable import PrettyTable
 
-def print_text(text):
-    print(text)
+
 
 def welcome():
-    print_text("Welcome to your to-do list!")
-    print_text('To view your tasks, please write "Tasks"')
-    print_text('To add a task to your list, please write "Add"')
-    print_text('To mark a task as completed, please write "Completed"')
-    print_text('To delete a task, please write "Delete"')    
-    print_text('To exit the app, please write "Exit"')
+    print("Welcome to your to-do list!")
+    print('To view your tasks, please write "Tasks"')
+    print('To add a task to your list, please write "Add"')
+    print('To mark a task as completed, please write "Completed"')
+    print('To delete a task, please write "Delete"')    
+    print('To exit the app, please write "Exit"')
 
 class TaskMemento:
     def __init__(self, task_list):
@@ -71,10 +70,10 @@ class ToDoListManager:
                 self.save_state()
                 self.display_tasks()
                 task_found = True
-                print_text("Task deleted successfully!")
+                print("Task deleted successfully!")
                 break
         if not task_found:
-            print_text(f"Task with description '{task_description}' not found.")
+            print(f"Task with description '{task_description}' not found.")
 
 
     def mark_completed(self, task_description):
@@ -87,7 +86,7 @@ class ToDoListManager:
                 task_found = True
                 break
         if not task_found:
-            print_text(f"Task with description '{task_description}' not found.")
+            print(f"Task with description '{task_description}' not found.")
 
     def view_tasks(self, filter_type=None):
         if filter_type == "completed":
@@ -106,9 +105,9 @@ class ToDoListManager:
         # Move this line to the beginning of the method
         tasks = self.view_tasks()
 
-        print_text("\nAll tasks:")
+        print("\nAll tasks:")
         if not tasks:
-            print_text("No tasks available.")
+            print("No tasks available.")
         else:
             self.display_table(tasks)
 
@@ -124,7 +123,7 @@ class ToDoListManager:
             table.add_row([task.description, status, due_date.strftime("%Y-%m-%d"), tags_str])
 
 
-        print_text(table)
+        print(table)
 
 
 if __name__ == "__main__":
@@ -136,7 +135,7 @@ if __name__ == "__main__":
 
         if user_input == "tasks":
             if not todo_manager.tasks:
-                print_text("No tasks available.")
+                print("No tasks available.")
             else:
                 todo_manager.display_tasks()
 
@@ -146,14 +145,14 @@ if __name__ == "__main__":
             tags = input("Enter tags (optional, separate with commas if multiple): ").split(",")
             task = TaskBuilder(description).set_due_date(due_date.strip()).set_tags([tag.strip() for tag in tags]).build()
             todo_manager.add_task(task)
-            print_text("Task added successfully!")
+            print("Task added successfully!")
            
 
         elif user_input == "completed":
             todo_manager.display_tasks()
             description = input("Enter task description to mark as completed: ")
             todo_manager.mark_completed(description)
-            print_text("Task marked as completed!")
+            print("Task marked as completed!")
             
 
         elif user_input == "delete":
@@ -163,9 +162,9 @@ if __name__ == "__main__":
 
         elif user_input == "exit":
             todo_manager.display_tasks()
-            print_text("Exiting...")
+            print("Exiting...")
 
             break
 
         else:
-            print_text("Invalid command. Please enter a valid command from the options.")
+            print("Invalid command. Please enter a valid command from the options.")
